@@ -34,10 +34,10 @@
         ;; the rings could have been done programmatically but for
         ;; the sake of clarity I've preferred this more verbose way
         slices       (mg/subdiv :rows 13 :out[
-                                            seventh-ring  nil
-                                            sixth-ring  nil
-                                            fifth-ring  nil
-                                            forth-ring  nil
+                                            seventh-ring nil
+                                            sixth-ring nil
+                                            fifth-ring nil
+                                            forth-ring nil
                                             third-ring nil
                                             second-ring nil
                                             first-ring])
