@@ -13,7 +13,7 @@ A new file with `.ply` extension will be created in the main project folder.
 
 List of available meshes:
 
-* `sprits`
+* `spritz`
 * `fake-teasel`
 
 To render them with Blender, you can follow [this tutorial](http://funprogramming.org/153-Rendering-Processing-shapes-in-Blender.html) by Abe Pazos
