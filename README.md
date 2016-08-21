@@ -11,6 +11,6 @@ Clone this repository and `cd` in the folder. Launch the REPL `lein repl`
 To export a mesh, like that one created in the `spritz` function, use `(apply save-mesh (spritz))`
 A new file with `.ply` extension will be created in the main project folder.
 
-To render them with Blender, follow the instruction provided in t
+To render them with Blender, you can follow [this tutorial](http://funprogramming.org/153-Rendering-Processing-shapes-in-Blender.html) by Abe Pazos
 
 
