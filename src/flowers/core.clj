@@ -51,9 +51,11 @@
         fifth-ring   (mg/reflect :w :out [(petal 7.35 0.6 0.25)])
         sixth-ring   (mg/reflect :w :out [(petal 8.35 0.6 0.15)])
         seventh-ring (mg/reflect :w :out [(petal 9.35 0.6 0.05)])
+        eigth-ring (mg/reflect :w :out [(petal 10.35 0.6 0.0010)])
         ;; the rings could have been done programmatically but for
         ;; the sake of clarity I've preferred this more verbose way
         slices       (mg/subdiv :rows 13 :out[
+                                            eigth-ring  nil
                                             seventh-ring nil
                                             sixth-ring nil
                                             fifth-ring nil
@@ -61,8 +63,8 @@
                                             third-ring nil
                                             second-ring nil
                                             first-ring])
-        hex         (mg/apply-recursively (mg/reflect :w :out [slices slices]) 5 [1] 1)
-        seed        (mg/sphere-lattice-seg 6 0.455 0.1355 0.38)]
+        hex         (mg/apply-recursively (mg/reflect :w :out [slices slices]) 7 [1] 1)
+        seed        (mg/sphere-lattice-seg 8 1.605 0.10155 0.68)]
     [seed hex]))
 
 ;; FAKE-TEASEL
