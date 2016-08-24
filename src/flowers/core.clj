@@ -135,6 +135,39 @@
         seed   (mg/sphere-lattice-seg 16 2.855 0.3 0.2)]
     [seed side]))
 
+;; CATHERINE-WHEEL
+(defn scale-side
+  [hex distorsion]
+  (mg/scale-edge :ef :y
+                 :scale distorsion
+                 :out [hex]))
+
+(defn displace-ring
+  [& {:keys [offset scale] :or {offset 0.2 scale 1.0}}]
+  (let [displace-it (mg/split-displace :y :z :offset offset :out [nil {}])
+        scale-it    (mg/scale-edge :bc :z :scale scale :out [displace-it])]
+    scale-it))
+
+(defn catherine-wheel
+  [& {:keys [offset scale y-distorsion]
+      :or {offset 1.2 scale 1.35 y-distorsion 1.0}}]
+  (let[
+       n-slices 500
+       n-rings 30
+       nil-values     (vec (replicate n-slices nil))
+       slices-indexes (reverse(take n-rings(iterate (partial * 0.8) (- n-slices 1))))
+       slices-indexes (distinct(map int slices-indexes))
+       scale-values   (take n-rings (iterate (partial * scale) 0.05))
+       offset-values  (take n-rings (iterate (partial * offset) 0.05))
+       rings          (map #(displace-ring :offset %1 :scale %2) offset-values scale-values)
+       indx-and-rings (interleave slices-indexes rings)
+       roses          (apply assoc nil-values indx-and-rings)
+       slices         (mg/subdiv :slices n-slices :out roses)
+       side           (mg/apply-recursively (mg/reflect :e :out[slices slices]) 23 [1] 1)
+       side           (scale-side side y-distorsion)
+       seed           (mg/sphere-lattice-seg 24 1.955 0.0955 0.6)]
+    [seed side]))
+
 (defn save-mesh
   [seed tree]
   (-> seed
