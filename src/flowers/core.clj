@@ -43,6 +43,7 @@
     tree))
 
 (defn spritz
+  "it returns a seed and an operation"
   []
   (let [first-ring   (mg/reflect :w :out [(petal 3.35 0.6 0.45)])
         second-ring  (mg/reflect :w :out [(petal 4.35 0.6 0.40)])
@@ -128,6 +129,7 @@
     body))
 
 (defn fake-teasel
+  "it returns a seed and an operation"
   []
   (let [leafs  (mg/extrude :dir :s :len 0.8 :out [(leaf 15 0.8)])
         slices (mg/subdiv :slices 10 :out [leafs nil nil (bud) nil nil nil nil (middle)])
@@ -149,6 +151,7 @@
     scale-it))
 
 (defn catherine-wheel
+  "it returns a seed and an operation, it accepts 3 parameters, offset, scale and y-distorsion"
   [& {:keys [offset scale y-distorsion]
       :or {offset 1.2 scale 1.35 y-distorsion 1.0}}]
   (let[
@@ -170,6 +173,7 @@
 
 ;; FLW
 (defn flw
+  "it returns a seed and an operation, it accepts 4 parameters n_petals height angle wall"
   ([](flw 8 0.405 0.1215 0.2))
   ([n_petali](flw n_petali 0.405 0.1215 0.2))
   ([n_petali altezza](flw n_petali altezza 0.1215 0.2))
