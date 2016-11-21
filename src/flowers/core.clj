@@ -168,6 +168,21 @@
        seed           (mg/sphere-lattice-seg 24 1.955 0.0955 0.6)]
     [seed side]))
 
+;; FLW
+(defn flw
+  ([](flw 8 0.405 0.1215 0.2))
+  ([n_petali](flw n_petali 0.405 0.1215 0.2))
+  ([n_petali altezza](flw n_petali altezza 0.1215 0.2))
+  ([n_petali altezza inclinazione](flw n_petali altezza inclinazione 0.2))
+  ([n_petali altezza inclinazione wall]
+   (let [
+         fifth-ring   (mg/reflect :w :out [(petal 8.35 0.3 0.4)])
+         slices       (mg/subdiv :rows 13 :out[fifth-ring  nil])
+         hex         (mg/apply-recursively (mg/reflect :w :out [slices slices]) (- n_petali 1) [1] 1)
+         seed        (mg/sphere-lattice-seg n_petali altezza inclinazione wall)
+         ]
+     [seed hex])))
+
 (defn save-mesh
   [seed tree]
   (-> seed
