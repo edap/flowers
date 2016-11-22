@@ -173,17 +173,18 @@
 
 ;; FLW
 (defn flw
-  "it returns a seed and an operation, it accepts 4 parameters n_petals height angle wall"
+  "it returns a seed and an operation"
   ([](flw 8 0.405 0.1215 0.2))
-  ([n_petali](flw n_petali 0.405 0.1215 0.2))
-  ([n_petali altezza](flw n_petali altezza 0.1215 0.2))
-  ([n_petali altezza inclinazione](flw n_petali altezza inclinazione 0.2))
-  ([n_petali altezza inclinazione wall]
+  ([n_petali](flw n_petali 8.35 0.405 0.1215 0.2))
+  ([n_petali height-sphere](flw n_petali height-sphere 8.35 0.1215 0.2))
+  ([n_petali height-sphere height-petals](flw n_petali height-sphere height-petals 0.1215 0.2))
+  ([n_petali height-sphere height-petals inclinazione](flw n_petali height-sphere height-petals inclinazione 0.2))
+  ([n_petali height-sphere height-petals inclinazione wall]
    (let [
-         fifth-ring   (mg/reflect :w :out [(petal 8.35 0.3 0.4)])
+         fifth-ring   (mg/reflect :w :out [(petal height-petals 0.4 0.4)])
          slices       (mg/subdiv :rows 13 :out[fifth-ring  nil])
          hex         (mg/apply-recursively (mg/reflect :w :out [slices slices]) (- n_petali 1) [1] 1)
-         seed        (mg/sphere-lattice-seg n_petali altezza inclinazione wall)
+         seed        (mg/sphere-lattice-seg n_petali height-sphere inclinazione wall)
          ]
      [seed hex])))
 
