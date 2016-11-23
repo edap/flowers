@@ -174,14 +174,16 @@
 ;; FLW
 (defn flw
   "it returns a seed and an operation"
-  ([](flw 8 0.405 0.1215 0.2))
-  ([n_petali](flw n_petali 8.35 0.405 0.1215 0.2))
-  ([n_petali height-sphere](flw n_petali height-sphere 8.35 0.1215 0.2))
-  ([n_petali height-sphere height-petals](flw n_petali height-sphere height-petals 0.1215 0.2))
-  ([n_petali height-sphere height-petals inclinazione](flw n_petali height-sphere height-petals inclinazione 0.2))
-  ([n_petali height-sphere height-petals inclinazione wall]
+  ([](flw 8 0.405 0.1215 0.2 0.4 0.4))
+  ([n_petali](flw n_petali 8.35 0.405 0.1215 0.2 0.4 0.4))
+  ([n_petali height-sphere](flw n_petali height-sphere 8.35 0.1215 0.2 0.4 0.4))
+  ([n_petali height-sphere height-petals](flw n_petali height-sphere height-petals 0.1215 0.2 0.4 0.4))
+  ([n_petali height-sphere height-petals inclinazione](flw n_petali height-sphere height-petals inclinazione 0.2 0.4 0.4))
+  ([n_petali height-sphere height-petals inclinazione wall](flw n_petali height-sphere height-petals inclinazione wall 0.4 0.4))
+  ([n_petali height-sphere height-petals inclinazione wall outset](flw n_petali height-sphere height-petals inclinazione wall outset 0.4))
+  ([n_petali height-sphere height-petals inclinazione wall outset hole]
    (let [
-         fifth-ring   (mg/reflect :w :out [(petal height-petals 0.4 0.4)])
+         fifth-ring   (mg/reflect :w :out [(petal height-petals outset hole )])
          slices       (mg/subdiv :rows 13 :out[fifth-ring  nil])
          hex         (mg/apply-recursively (mg/reflect :w :out [slices slices]) (- n_petali 1) [1] 1)
          seed        (mg/sphere-lattice-seg n_petali height-sphere inclinazione wall)
